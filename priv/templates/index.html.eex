@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville">
+
+  <title>ostinato</title>
+
+</head>
+
+<body>
+  <noscript>
+    <strong>We're sorry but ostinato doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+  </noscript>
+
+  <div id="app" class="container">
+    <h4>Task chain</h4>
+
+    <div class="row">
+      <div class="col s4">
+        <label for="lookback-days">Lookback days</label>
+        <input v-model.lazy="lookback_days" id="lookback-days" type="number" min=1 max=14 class="validate">
+      </div>
+      <div class="col s8">
+        <label for="api-message">API messages</label>
+        <input disabled v-model="api_message" id="api-message">
+      </div>
+    </div>
+    <table v-if="tasks" class="centered">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Task</th>
+          <th v-for="date in dateHeaders" :key="date">
+            {{ date }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="task in tasks" :key="task.id">
+          <td><i v-on:click="deleteClicked(task.id)" class="material-icons delete-icon">delete</i></td>
+          <td>{{ task.title }}</td>
+          <td v-on:click="toggleClicked(task.id, completed.date)" v-for="completed in task.completeds" :key="completed.date"
+            :id="'' + task.id + '_' + completed.date" class="completed-cell">
+            <i v-if="completed.completed" class="material-icons">check</i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h5>Add a task</h5>
+
+    <div class="row">
+      <form class="col s12">
+        <div class="row">
+          <div class="input-field col s6">
+            <input id="new-title" type="text" class="validate">
+            <label for="new-title">Title</label>
+          </div>
+          <div class="input-field col s6">
+            <input disabled id="new-desc" type="text" class="validate">
+            <label for="new-desc">Description (TODO)</label>
+          </div>
+        </div>
+      </form>
+      <div class="row">
+        <div class="input-field col 4">
+          <button v-on:click="newClicked" class="btn waves-effect waves-light">Submit
+            <i class="material-icons right">send</i>
+          </button>
+        </div>
+        <div class="col s8">
+          <label for="form-message">Form messages</label>
+          <input disabled v-model="form_message" id="form-message">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.29.0/date_fns.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js"></script>
+  <script src="https://unpkg.com/vue-async-computed@3.4.1"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+
+<script>
+  new Vue({
+    el: '#app',
+
+    data: function () {
+      return {
+        // TODO: Set validation constraints (e.g. between 1 and 14)
+        lookback_days: 7,
+        api_message: "...",
+        form_message: "..."
+      };
+    },
+
+    computed: {
+      dateHeaders() {
+        let lookback_days = this.lookback_days;
+        if (this.lookback_days < 1) lookback_days = 1;
+        const dates = this.getDates(lookback_days);
+        return dates.map(function (date) {
+          return dateFns.format(date, "MMM DD");
+        });
+      },
+    },
+
+    asyncComputed: {
+      async tasks() {
+        let lookback_days = this.lookback_days;
+        // ! This is kinda hacky, but can't yet think of another way
+        // ! to trigger a table update after toggling a completion...
+        let _message = this.api_message;
+        // ! Same thing for updating after task creation...
+        _message = this.form_message;
+        if (this.lookback_days < 1) lookback_days = 1;
+        const dates = this.getDates(lookback_days);
+        const data = await axios
+          .get("http://localhost:4000/task")
+          .then(response => response.data);
+        const tasks = data.map(function (task) {
+          const completions = task.completions.map(function (completion) {
+            return dateFns.format(dateFns.parse(completion), "YYYY-MM-DD");
+          });
+          const completeds = dates.map(function (date) {
+            if (completions.includes(date)) {
+              return {
+                date: date,
+                completed: true
+              };
+            } else {
+              return {
+                date: date,
+                completed: false
+              };
+            }
+          });
+          return {
+            id: task.id,
+            title: task.title,
+            completeds: completeds
+          };
+        });
+        return tasks;
+      }
+    },
+
+    mounted() { },
+
+    updated() { },
+
+    methods: {
+      getDates: function (lookback_days) {
+        const today = dateFns.startOfToday();
+        const dates = _.range(lookback_days).map(function (lookback) {
+          return dateFns.format(dateFns.subDays(today, lookback), "YYYY-MM-DD");
+        });
+        return dates;
+      },
+
+      toggleClicked: function (taskId, date) {
+        // if (!event) return;
+
+        // const id = event.currentTarget.id;
+        // const taskId = id.split("_")[0];
+        // const date = id.split("_")[1];
+
+        var that = this;
+        this.tasks = [];
+        axios
+          .get("http://localhost:4000/task/" + taskId + "/" + date)
+          .then(function (response) {
+            that.api_message = response.data.message;
+          });
+      },
+
+      newClicked: function (event) {
+        if (!event) return;
+
+        const title = document.getElementById("new-title").value;
+        if (title == "") {
+          this.form_message = "Please specify a task title.";
+          return;
+        }
+
+        var that = this;
+        this.form_message = "Submitting new task...";
+        axios
+          .get("http://localhost:4000/task/" + encodeURIComponent(title))
+          .then(function (response) {
+            that.form_message = response.data.message;
+          });
+      },
+
+      deleteClicked: function (taskId) {
+        const accepted = window.confirm("Are you sure?");
+        if (!accepted) return;
+
+        var that = this;
+        axios
+          .delete("http://localhost:4000/task/" + taskId)
+          .then(function (response) {
+            that.api_message = response.data.message;
+          });
+      }
+    }
+  });
+</script>
+
+<style>
+  body {
+    font-family: 'Libre Baskerville', serif;
+  }
+
+  .completed-cell:hover {
+    background-color: lightgray;
+    cursor: pointer;
+    transition: all 0.5s;
+  }
+
+  .delete-icon:hover {
+    cursor: pointer;
+    color: red;
+    transition: all 0.5s;
+  }
+</style>
+
+</html>

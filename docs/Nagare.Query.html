@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="ExDoc v0.19.1">
+  <title>Ostinato.Query – ostinato v0.1.0</title>
+  <link rel="stylesheet" href="dist/app-240d7fc7e5.css" />
+  <script src="dist/sidebar_items-71f2524e00.js"></script>
+
+</head>
+
+<body data-type="modules">
+  <script>try { if (localStorage.getItem('night-mode')) document.body.className += ' night-mode'; } catch (e) { }</script>
+  <div class="main">
+    <button class="sidebar-button sidebar-toggle">
+      <span class="icon-menu" aria-hidden="true"></span>
+      <span class="sr-only">Toggle Sidebar</span>
+    </button>
+    <button class="sidebar-button night-mode-toggle">
+      <span class="icon-theme" aria-hidden="true"></span>
+      <span class="sr-only">Toggle Theme</span>
+    </button>
+    <section class="sidebar">
+
+      <a href="api-reference.html" class="sidebar-projectLink">
+        <div class="sidebar-projectDetails">
+          <h1 class="sidebar-projectName">
+            ostinato </h1>
+          <h2 class="sidebar-projectVersion">
+            v0.1.0
+          </h2>
+        </div>
+      </a>
+
+      <form class="sidebar-search" action="search.html">
+        <button type="submit" class="search-button">
+          <span class="icon-search" aria-hidden="true"></span>
+        </button>
+        <input name="q" type="text" id="search-list" class="search-input" placeholder="Search" aria-label="Search"
+          autocomplete="off" />
+      </form>
+
+      <ul class="sidebar-listNav">
+        <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+        <li><a id="modules-list" href="#full-list">Modules</a></li>
+
+
+      </ul>
+      <div class="gradient"></div>
+      <ul id="full-list" class="sidebar-fullList"></ul>
+    </section>
+
+    <section class="content">
+      <div class="content-outer">
+        <div id="content" class="content-inner">
+
+
+          <h1>
+            <small class="visible-xs">ostinato v0.1.0</small>
+            Ostinato.Query </h1>
+
+
+          <section id="moduledoc">
+            <p>Provides light wrapper functions for database query logic.</p>
+          </section>
+
+          <section id="summary" class="details-list">
+            <h1 class="section-heading">
+              <a class="hover-link" href="#summary">
+                <span class="icon-link" aria-hidden="true"></span>
+                <span class="sr-only">Link to this section</span>
+              </a>
+              Summary
+            </h1>
+
+            <div class="summary-functions summary">
+              <h2>
+                <a href="#functions">Functions</a>
+              </h2>
+              <div class="summary-row">
+                <div class="summary-signature">
+                  <a href="#delete_completion/1">delete_completion(task_completion)</a>
+                </div>
+              </div>
+              <div class="summary-row">
+                <div class="summary-signature">
+                  <a href="#delete_task/1">delete_task(task)</a>
+                </div>
+              </div>
+              <div class="summary-row">
+                <div class="summary-signature">
+                  <a href="#insert_completion/2">insert_completion(task_id, date)</a>
+                </div>
+              </div>
+              <div class="summary-row">
+                <div class="summary-signature">
+                  <a href="#insert_task/1">insert_task(title)</a>
+                </div>
+              </div>
+              <div class="summary-row">
+                <div class="summary-signature">
+                  <a href="#select_completion_by_task_and_date/2">select_completion_by_task_and_date(task_id, date)</a>
+                </div>
+              </div>
+              <div class="summary-row">
+                <div class="summary-signature">
+                  <a href="#select_task/1">select_task(id)</a>
+                </div>
+              </div>
+              <div class="summary-row">
+                <div class="summary-signature">
+                  <a href="#select_tasks_with_completions/0">select_tasks_with_completions()</a>
+                </div>
+              </div>
+              <div class="summary-row">
+                <div class="summary-signature">
+                  <a href="#select_titles/0">select_titles()</a>
+                </div>
+              </div>
+            </div>
+
+          </section>
+
+
+
+          <section id="functions" class="details-list">
+            <h1 class="section-heading">
+              <a class="hover-link" href="#functions">
+                <span class="icon-link" aria-hidden="true"></span>
+                <span class="sr-only">Link to this section</span>
+              </a>
+              Functions
+            </h1>
+            <div class="detail" id="delete_completion/1">
+              <div class="detail-header">
+                <a href="#delete_completion/1" class="detail-link" title="Link to this function">
+                  <span class="icon-link" aria-hidden="true"></span>
+                  <span class="sr-only">Link to this function</span>
+                </a>
+                <span class="signature">delete_completion(task_completion)</span>
+
+                <div class="specs">
+                  <pre>delete_completion(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">struct</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">struct</a>() | <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+                </div>
+              </div>
+              <section class="docstring">
+              </section>
+            </div>
+            <div class="detail" id="delete_task/1">
+              <div class="detail-header">
+                <a href="#delete_task/1" class="detail-link" title="Link to this function">
+                  <span class="icon-link" aria-hidden="true"></span>
+                  <span class="sr-only">Link to this function</span>
+                </a>
+                <span class="signature">delete_task(task)</span>
+
+                <div class="specs">
+                  <pre>delete_task(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">struct</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">struct</a>() | <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+                </div>
+              </div>
+              <section class="docstring">
+              </section>
+            </div>
+            <div class="detail" id="insert_completion/2">
+              <div class="detail-header">
+                <a href="#insert_completion/2" class="detail-link" title="Link to this function">
+                  <span class="icon-link" aria-hidden="true"></span>
+                  <span class="sr-only">Link to this function</span>
+                </a>
+                <span class="signature">insert_completion(task_id, date)</span>
+
+                <div class="specs">
+                  <pre>insert_completion(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">integer</a>(), <a href="https://hexdocs.pm/elixir/NaiveDateTime.html#t:t/0">NaiveDateTime.t</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">struct</a>() | <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+                </div>
+              </div>
+              <section class="docstring">
+              </section>
+            </div>
+            <div class="detail" id="insert_task/1">
+              <div class="detail-header">
+                <a href="#insert_task/1" class="detail-link" title="Link to this function">
+                  <span class="icon-link" aria-hidden="true"></span>
+                  <span class="sr-only">Link to this function</span>
+                </a>
+                <span class="signature">insert_task(title)</span>
+
+                <div class="specs">
+                  <pre>insert_task(<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">struct</a>() | <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+                </div>
+              </div>
+              <section class="docstring">
+              </section>
+            </div>
+            <div class="detail" id="select_completion_by_task_and_date/2">
+              <div class="detail-header">
+                <a href="#select_completion_by_task_and_date/2" class="detail-link" title="Link to this function">
+                  <span class="icon-link" aria-hidden="true"></span>
+                  <span class="sr-only">Link to this function</span>
+                </a>
+                <span class="signature">select_completion_by_task_and_date(task_id, date)</span>
+
+                <div class="specs">
+                  <pre>select_completion_by_task_and_date(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">integer</a>(), <a href="https://hexdocs.pm/elixir/NaiveDateTime.html#t:t/0">NaiveDateTime.t</a>()) ::
+  <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">struct</a>() | :not_found</pre>
+                </div>
+              </div>
+              <section class="docstring">
+              </section>
+            </div>
+            <div class="detail" id="select_task/1">
+              <div class="detail-header">
+                <a href="#select_task/1" class="detail-link" title="Link to this function">
+                  <span class="icon-link" aria-hidden="true"></span>
+                  <span class="sr-only">Link to this function</span>
+                </a>
+                <span class="signature">select_task(id)</span>
+
+                <div class="specs">
+                  <pre>select_task(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">integer</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">struct</a>() | :not_found</pre>
+                </div>
+              </div>
+              <section class="docstring">
+              </section>
+            </div>
+            <div class="detail" id="select_tasks_with_completions/0">
+              <div class="detail-header">
+                <a href="#select_tasks_with_completions/0" class="detail-link" title="Link to this function">
+                  <span class="icon-link" aria-hidden="true"></span>
+                  <span class="sr-only">Link to this function</span>
+                </a>
+                <span class="signature">select_tasks_with_completions()</span>
+
+                <div class="specs">
+                  <pre>select_tasks_with_completions() :: [<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">struct</a>()] | <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+                </div>
+              </div>
+              <section class="docstring">
+              </section>
+            </div>
+            <div class="detail" id="select_titles/0">
+              <div class="detail-header">
+                <a href="#select_titles/0" class="detail-link" title="Link to this function">
+                  <span class="icon-link" aria-hidden="true"></span>
+                  <span class="sr-only">Link to this function</span>
+                </a>
+                <span class="signature">select_titles()</span>
+
+                <div class="specs">
+                  <pre>select_titles() :: [<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">struct</a>()] | <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+                </div>
+              </div>
+              <section class="docstring">
+              </section>
+            </div>
+          </section>
+
+          <footer class="footer">
+            <p>
+              <span class="line">
+                Built using
+                <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener">ExDoc</a>
+                (v0.19.1),
+              </span>
+              <span class="line">
+                designed by
+                <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire">Friedel
+                  Ziegelmayer</a>.
+              </span>
+            </p>
+          </footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script src="dist/app-a0c90688fa.js"></script>
+
+</body>
+
+</html>
